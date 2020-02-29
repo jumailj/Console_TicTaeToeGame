@@ -35,7 +35,7 @@ char userInputForYesOrNo = '\0';
 bool elementAdded[3][3] = { {false,false,false},
                             {false,false,false},
                             {false,false,false} };
-
+                            
 int main() {
 
     cout << "---TIC TAC TOE---\n";
@@ -47,6 +47,25 @@ int main() {
     cout << "do you want to play again (y || n): ";
     cin >> userInputForYesOrNo;
     if (userInputForYesOrNo == 121) {
+		/// changing the elementadded array back to default;
+      
+		for(int i = 0; i<=2; i++) {
+			for(int j = 0; j<=2; j++) {
+				elementAdded[i][j] =false;
+			}
+			
+		}
+		
+		/// changing the board array back to default;
+		
+				for(int i = 0; i<=2; i++) {
+			for(int j = 0; j<=2; j++) {
+				board[i][j] ='a';
+			}
+			
+		}
+		
+		
         cout << "\n";
         StartGame();
     }
@@ -289,3 +308,4 @@ bool CheckingForAnyOSeries() {
     else if (hLine1X[2] == o && hLine2X[1] == o && hLine3X[0] == o) { return true; }
     else { return false; }
 };
+
