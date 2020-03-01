@@ -1,4 +1,6 @@
 #include <iostream>
+#include <stdlib.h>
+
 using namespace std;
 
 void WelcomeScreen();
@@ -23,8 +25,8 @@ int hLine3X[3] = { 0,0,0 };
 const int forX = 120; //for x;
 const int forO = 111; // for o;
 
- int x = 2;
- int o = 1;
+int x = 2;
+int o = 1;
 
 bool findXval = false;
 bool findOval = false;
@@ -35,61 +37,62 @@ char userInputForYesOrNo = '\0';
 bool elementAdded[3][3] = { {false,false,false},
                             {false,false,false},
                             {false,false,false} };
-                            
+
 int main() {
 
-    cout << "---TIC TAC TOE---\n";
-    cout << "only input Numbers: \n";
+    restart:
     WelcomeScreen();
-
     StartGame();
 
-    cout << "do you want to play again (y || n): ";
+    cout << "do you want to play again ('y'|'n'): ";
     cin >> userInputForYesOrNo;
-    if (userInputForYesOrNo == 121) {
-		/// changing the elementadded array back to default;
-      
-		for(int i = 0; i<=2; i++) {
-			for(int j = 0; j<=2; j++) {
-				elementAdded[i][j] =false;
-			}
-			
-		}
-		
-		/// changing the board array back to default;
-		
-				for(int i = 0; i<=2; i++) {
-			for(int j = 0; j<=2; j++) {
-				board[i][j] ='a';
-			}
-			
-		}
-		
-		
+    if (userInputForYesOrNo == 121 || userInputForYesOrNo == 89) {
+        system("CLS");
+        WelcomeScreen();
+        /// changing the elementadded array back to default;
+        for (int i = 0; i <= 2; i++) {
+            for (int j = 0; j <= 2; j++) {
+                elementAdded[i][j] = false;
+            }
+
+        }
+        /// changing the board array back to default;
+        for (int i = 0; i <= 2; i++) {
+            for (int j = 0; j <= 2; j++) {
+                board[i][j] = 'a';
+            }
+
+        }
         cout << "\n";
-        StartGame();
+        system("CLS");
+        goto restart;
     }
     else {
         cout << "quiting...";
         return 0;
     }
-    
-    system("PAUSE");
 
     return 0;
 }
 
 void WelcomeScreen() {
+    cout << "---TIC TAC TOE---\n";
     cout << "\nPlayer 1 = 'o'\n";
     cout << "Player 2 = 'x'\n\n";
 }
 
 void StartGame() {
-    for (int m = 1; m <= 18; m++) {
+
+    for ( int m = 1; m <= 10; m++) {
+        if (m >= 10) {
+            cout << "No one win\n";
+            ///forced to play one more time...;
+            system("CLS");
+            WelcomeScreen();
+        }
 
         if (m % 2 == 0) {
-
-            notvaliedX:
+        notvaliedX:
             cout << "player 2: "; cin >> playerInput;
 
             /// first row;
@@ -130,7 +133,7 @@ void StartGame() {
                     goto notvaliedX;
                 }
             }
-             /// !first !second !third: 
+            /// !first !second !third: 
             else {
                 cout << "\nInput Valid Value:\n";
                 goto notvaliedX;
@@ -149,11 +152,11 @@ void StartGame() {
         else {
 
             /// assinging values of 'o' relate to playerInput;
-            notvaliedO:
+        notvaliedO:
             cout << "player 1: "; cin >> playerInput;
 
             // first row
-            if (playerInput <= 3  && playerInput >= 0 ){
+            if (playerInput <= 3 && playerInput >= 0) {
 
                 if (elementAdded[0][playerInput - 1] == false) {
                     board[0][playerInput - 1] = 'o';
@@ -170,8 +173,8 @@ void StartGame() {
             else if (playerInput >= 4 && playerInput <= 6) {
 
                 if (elementAdded[1][playerInput - 3 - 1] == false) {
-                board[1][playerInput - 3 - 1] = 'o';
-                elementAdded[1][playerInput - 3 - 1] = true;
+                    board[1][playerInput - 3 - 1] = 'o';
+                    elementAdded[1][playerInput - 3 - 1] = true;
 
                 }
                 else {
@@ -184,9 +187,9 @@ void StartGame() {
             else if (playerInput >= 7 && playerInput <= 9) {
 
 
-                if (elementAdded[2][playerInput -3 - 3 - 1] == false) {
-                board[2][playerInput - 3 - 3 - 1] = 'o';
-                elementAdded[2][playerInput - 3 - 3 - 1] = true;
+                if (elementAdded[2][playerInput - 3 - 3 - 1] == false) {
+                    board[2][playerInput - 3 - 3 - 1] = 'o';
+                    elementAdded[2][playerInput - 3 - 3 - 1] = true;
                 }
                 else {
                     cout << playerInput << " is taken, retry: \n";
@@ -204,8 +207,6 @@ void StartGame() {
             findXval = CheckingForAnyXSeries();
             findOval = CheckingForAnyOSeries();
 
-
-
             if (findOval == true) {
                 cout << "Player 1 Win!\n";
                 break;
@@ -222,15 +223,18 @@ void ReadingAndWriting() {
         for (int j = 0; j <= 2; j++) {
             cout << elementAdded[i][j] << " ";
         }cout << endl;
-    } 
+    }
     cout <<endl;
     */
+
+    system("CLS");
+    WelcomeScreen();
 
     for (int i = 0; i < 3; i++) {
 
         for (int j = 0; j < 3; j++) {
 
-                 ///checking && assign for (0,0) , (0,1) , (0,2)
+            ///checking && assign for (0,0) , (0,1) , (0,2)
             if (j < 3 && i == 0) {
                 if (board[i][j] == forO) {
                     cout << " o ";
@@ -242,7 +246,7 @@ void ReadingAndWriting() {
                     hLine1X[j] = 2;
                 }
                 else {
-                    hLine1X[j] = 0; 
+                    hLine1X[j] = 0;
                     cout << "   ";
                 }
             }
@@ -308,4 +312,3 @@ bool CheckingForAnyOSeries() {
     else if (hLine1X[2] == o && hLine2X[1] == o && hLine3X[0] == o) { return true; }
     else { return false; }
 };
-
