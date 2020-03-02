@@ -4,7 +4,9 @@
 using namespace std;
 
 void WelcomeScreen();
+void ResetElementsAndBoard();
 void ReadingAndWriting();
+void ResetElementsAndBoard();
 
 bool CheckingForAnyXSeries();
 bool CheckingForAnyOSeries();
@@ -38,9 +40,11 @@ bool elementAdded[3][3] = { {false,false,false},
                             {false,false,false},
                             {false,false,false} };
 
+
 int main() {
 
-    restart:
+restart:
+    ResetElementsAndBoard();
     WelcomeScreen();
     StartGame();
 
@@ -49,20 +53,7 @@ int main() {
     if (userInputForYesOrNo == 121 || userInputForYesOrNo == 89) {
         system("CLS");
         WelcomeScreen();
-        /// changing the elementadded array back to default;
-        for (int i = 0; i <= 2; i++) {
-            for (int j = 0; j <= 2; j++) {
-                elementAdded[i][j] = false;
-            }
 
-        }
-        /// changing the board array back to default;
-        for (int i = 0; i <= 2; i++) {
-            for (int j = 0; j <= 2; j++) {
-                board[i][j] = 'a';
-            }
-
-        }
         cout << "\n";
         system("CLS");
         goto restart;
@@ -226,7 +217,6 @@ void ReadingAndWriting() {
     }
     cout <<endl;
     */
-
     system("CLS");
     WelcomeScreen();
 
@@ -312,3 +302,21 @@ bool CheckingForAnyOSeries() {
     else if (hLine1X[2] == o && hLine2X[1] == o && hLine3X[0] == o) { return true; }
     else { return false; }
 };
+
+void ResetElementsAndBoard()
+{
+    /// changing the elementadded array back to default;
+    for (int i = 0; i <= 2; i++) {
+        for (int j = 0; j <= 2; j++) {
+            elementAdded[i][j] = false;
+        }
+
+    }
+    /// changing the board array back to default;
+    for (int i = 0; i <= 2; i++) {
+        for (int j = 0; j <= 2; j++) {
+            board[i][j] = 'a';
+        }
+
+    }
+}
